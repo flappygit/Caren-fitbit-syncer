@@ -20,8 +20,8 @@ defmodule FitbitClient.Router do
     resources "/users", UserController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FitbitClient do
-  #   pipe_through :api
-  # end
+  scope "/auth", FitbitClient do
+    pipe_through :browser
+    get "/", AuthController, :index
+  end
 end
