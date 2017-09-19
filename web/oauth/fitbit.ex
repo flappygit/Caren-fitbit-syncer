@@ -7,9 +7,9 @@ defmodule Fitbit do
   def new do
     OAuth2.Client.new([
       strategy: __MODULE__,
-      client_id: System.get_env("CLIENT_ID"),
-      client_secret: System.get_env("CLIENT_SECRET"),
-      redirect_uri: System.get_env("REDIRECT_URI"),
+      client_id: System.get_env("FITBIT_CLIENT_ID"),
+      client_secret: System.get_env("FITBIT_CLIENT_SECRET"),
+      redirect_uri: System.get_env("FITBIT_REDIRECT_URI"),
       site: "https://api.fitbit.com",
       authorize_url: "https://www.fitbit.com/oauth2/authorize",
       token_url: "https://api.fitbit.com/oauth2/token"
@@ -33,7 +33,7 @@ defmodule Fitbit do
   def get_token(client, params, headers) do
     client
     |> put_header("Accept", "application/json")
-    |> put_header("Authorization", "Basic " <> Base.encode64( System.get_env("CLIENT_ID") <> ":" <> System.get_env("CLIENT_SECRET")))
+    |> put_header("Authorization", "Basic " <> Base.encode64( System.get_env("FITBIT_CLIENT_ID") <> ":" <> System.get_env("FITBIT_CLIENT_SECRET")))
     |> AuthCode.get_token(params, headers)
   end
 end

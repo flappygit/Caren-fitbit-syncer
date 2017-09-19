@@ -2,4 +2,5 @@
   <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
 </div>
-<a href="/auth"><p>Sign in with Fitbit</p></a>
+<a href="/auth/caren"><p>Sign in with Caren</p></a>
+<a href="/auth/fitbit"><p>Sign in with Fitbit</p></a>

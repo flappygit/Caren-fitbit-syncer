@@ -1,4 +1,4 @@
-# FitbitClient
+# Caren- FitbitClient
 
 To start your Phoenix app:
 
