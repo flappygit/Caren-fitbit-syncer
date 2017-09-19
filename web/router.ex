@@ -23,5 +23,6 @@ defmodule FitbitClient.Router do
   scope "/auth", FitbitClient do
     pipe_through :browser
     get "/", AuthController, :index
+    get "/callback", AuthController, :callback
   end
 end
