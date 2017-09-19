@@ -16,6 +16,6 @@ defmodule FitbitClient.User do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :email, :access_token, :refresh_token])
-    |> validate_required([:name, :email, :access_token, :refresh_token])
+    # |> validate_required([:name, :email, :access_token, :refresh_token])
   end
 end
