@@ -9,6 +9,9 @@ use Mix.Config
 config :fitbit_client,
   ecto_repos: [FitbitClient.Repo]
 
+config :oauth2,
+  warn_missing_serializer: false
+
 # Configures the endpoint
 config :fitbit_client, FitbitClient.Endpoint,
   url: [host: "localhost"],

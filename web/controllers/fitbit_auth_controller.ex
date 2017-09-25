@@ -1,4 +1,4 @@
-defmodule FitbitClient.AuthController do
+defmodule FitbitClient.FitbitAuthController do
   use FitbitClient.Web, :controller
   alias FitbitClient.User
 

@@ -22,7 +22,13 @@ defmodule FitbitClient.Router do
 
   scope "/auth/fitbit", FitbitClient do
     pipe_through :browser
-    get "/", AuthController, :index
-    get "/callback", AuthController, :callback
+    get "/", FitbitAuthController, :index
+    get "/callback", FitbitAuthController, :callback
+  end
+
+  scope "/auth/caren", FitbitClient do
+    pipe_through :browser
+    get "/", CarenAuthController, :index
+    get "/callback", CarenAuthController, :callback
   end
 end
