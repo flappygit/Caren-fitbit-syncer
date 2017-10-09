@@ -6,7 +6,7 @@ defmodule FitbitClient.User do
     field :email, :string
     field :access_token, :string
     field :refresh_token, :string
-
+    field :caren_id, :integer
     timestamps()
   end
 
@@ -15,7 +15,7 @@ defmodule FitbitClient.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :access_token, :refresh_token])
+    |> cast(params, [:name, :email, :access_token, :refresh_token, :caren_id])
     # |> validate_required([:name, :email, :access_token, :refresh_token])
   end
 end
