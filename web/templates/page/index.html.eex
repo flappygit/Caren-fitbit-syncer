@@ -4,4 +4,4 @@
 </div>
 <a href="/auth/caren"><p>Sign in with Caren</p></a>
 <a href="/auth/fitbit"><p>Sign in with Fitbit</p></a>
-<a href="/api/events"><p>Show me some example iCal data!</p>
+<a href="/api/events.ical"><p>Show me some example iCal data!</p>

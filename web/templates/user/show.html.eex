@@ -22,6 +22,12 @@
     <%= @user.refresh_token %>
   </li>
 
+  <li>
+    <strong>Caren ID:</strong>
+    <%= @user.caren_id %>
+  </li>
+
+
 </ul>
 
 <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
