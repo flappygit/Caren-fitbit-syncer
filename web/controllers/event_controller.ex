@@ -1,8 +1,6 @@
 defmodule FitbitClient.EventController do
   use FitbitClient.Web, :controller
 
-  plug :action
-
   def index(conn, _params) do
     events = [
     %ICalendar.Event{
