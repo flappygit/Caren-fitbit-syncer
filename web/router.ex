@@ -15,9 +15,13 @@ defmodule FitbitClient.Router do
 
   scope "/", FitbitClient do
     pipe_through :browser # Use the default browser stack
-
     get "/", PageController, :index
     resources "/users", UserController
+  end
+
+  scope "/api", FitbitClient do
+    pipe_through :api
+    resources "/events", EventController
   end
 
   scope "/auth/fitbit", FitbitClient do
