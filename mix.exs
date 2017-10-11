@@ -43,7 +43,8 @@ defmodule FitbitClient.Mixfile do
       {:cowboy, "~> 1.0"},
       {:oauth2, "~> 0.9"},
       {:icalendar, "~> 0.4.0"},
-      {:phoenix_html_simplified_helpers, "~> 1.3.2"}
+      {:phoenix_html_simplified_helpers, "~> 1.3.2"},
+      {:joken, "~> 1.5"}
     ]
   end
 
