@@ -23,6 +23,11 @@
   </li>
 
   <li>
+    <strong>Steps:</strong>
+    <%= @user.steps %>
+  </li>
+
+  <li>
     <strong>Caren ID:</strong>
     <%= @user.caren_id %>
   </li>
