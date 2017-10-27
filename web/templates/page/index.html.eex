@@ -1,7 +1,7 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2><%= gettext "Stay fit with Caren" %></h2>
+  <p class="lead">With this awesome client your data<br />gets synced with Caren, how great is that!</p>
 </div>
 <a href="/auth/caren"><p>Sign in with Caren</p></a>
 <a href="/auth/fitbit"><p>Sign in with Fitbit</p></a>
-<a href="/api/events.ical"><p>Show me some example iCal data!</p>
+<a href="/api/events.ical"><p>Show me some example iCal data!</p></a>

@@ -9,12 +9,28 @@ defmodule FitbitClient.FitbitAuthController do
   def callback(conn, %{"code" => code}) do
     token = Fitbit.get_token!(code: code)
     user = OAuth2.Client.get!(token, "/1/user/-/profile.json").body
-    
-    activities_steps = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/2017-10-26/1d.json").body
-    temp = activities_steps["activities-steps"]
-    get_steps_from_activities = Enum.map(temp, fn (x) -> x["value"] end)
-    get_steps_from_array = Enum.at(get_steps_from_activities, 0)
-    steps = String.to_integer(get_steps_from_array)
+
+    steps_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
+    observation = Enum.map(steps_data["activities-steps"], fn (activity) ->
+      %{
+        "coding" => [
+          %{
+            "code" => "55423-8",
+            "codeSystem" => "http://loinc.org"
+          }
+        ],
+        "effectivePeriod" => %{
+          "start" => activity["dateTime"] <> " 00:00",
+          "end" => activity["dateTime"] <> " 23:59"
+        },
+        "value" => %{
+          "quantity" => activity["value"]
+        }
+      }end)
+
+    encoded_observation = Poison.encode!(observation)
+    IO.inspect(observation)
+    IO.inspect(encoded_observation)
 
     name = user["user"]["fullName"]
     changeset = User.changeset(%User{},
@@ -22,8 +38,7 @@ defmodule FitbitClient.FitbitAuthController do
         name: name,
         user_id: token.token.other_params["user_id"],
         access_token: token.token.access_token,
-        refresh_token: token.token.refresh_token,
-        steps: steps
+        refresh_token: token.token.refresh_token
       })
       Repo.insert!(changeset)
 

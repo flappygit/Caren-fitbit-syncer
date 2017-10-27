@@ -44,7 +44,8 @@ defmodule FitbitClient.Mixfile do
       {:oauth2, "~> 0.9"},
       {:icalendar, "~> 0.4.0"},
       {:phoenix_html_simplified_helpers, "~> 1.3.2"},
-      {:joken, "~> 1.5"}
+      {:joken, "~> 1.5"},
+      {:poison, "~> 3.1"}
     ]
   end
 
