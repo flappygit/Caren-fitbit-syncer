@@ -10,8 +10,8 @@ defmodule FitbitClient.FitbitAuthController do
     token = Fitbit.get_token!(code: code)
     user = OAuth2.Client.get!(token, "/1/user/-/profile.json").body
 
-    steps_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
-    observation = Enum.map(steps_data["activities-steps"], fn (activity) ->
+    data_month_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
+    observation = Enum.map(data_month_data["activities-steps"], fn (activity) ->
       %{
         "coding" => [
           %{
@@ -19,18 +19,11 @@ defmodule FitbitClient.FitbitAuthController do
             "codeSystem" => "http://loinc.org"
           }
         ],
-        "effectivePeriod" => %{
-          "start" => activity["dateTime"] <> " 00:00",
-          "end" => activity["dateTime"] <> " 23:59"
-        },
-        "value" => %{
-          "quantity" => activity["value"]
+        "effectiveDateTime" => activity["dateTime"] <> " 00:00",
+        "valueQuantity" => %{
+          "value" => activity["value"]
         }
-      }end)
-
-    encoded_observation = Poison.encode!(observation)
-    IO.inspect(observation)
-    IO.inspect(encoded_observation)
+      }end) |> encode_map_to_json
 
     name = user["user"]["fullName"]
     changeset = User.changeset(%User{},
@@ -45,5 +38,10 @@ defmodule FitbitClient.FitbitAuthController do
       conn
         |> put_flash(:info, "User #{name}.")
         |> redirect(to: "/")
+  end
+
+  def encode_map_to_json(observation) do
+    encoded_observation = Poison.encode!(observation)
+    IO.inspect(encoded_observation)
   end
 end
