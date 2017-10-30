@@ -11,10 +11,7 @@ defmodule FitbitClient do
       # Start the Ecto repository
       supervisor(FitbitClient.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(FitbitClient.Endpoint, []),
-
-       # Fitbit worker
-      worker(FitbitClient.Periodically, [])
+      supervisor(FitbitClient.Endpoint, [])
 
       # Start your own worker by calling: FitbitClient.Worker.start_link(arg1, arg2, arg3)
       # worker(FitbitClient.Worker, [arg1, arg2, arg3]),

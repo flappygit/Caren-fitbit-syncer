@@ -19,11 +19,6 @@ defmodule FitbitClient.Router do
     resources "/users", UserController
   end
 
-  scope "/api", FitbitClient do
-    pipe_through :api
-    resources "/events.ical", EventController
-  end
-
   scope "/auth/fitbit", FitbitClient do
     pipe_through :browser
     get "/", FitbitAuthController, :index
