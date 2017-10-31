@@ -6,10 +6,6 @@
       <th>Name</th>
       <th>Email</th>
       <th>Access token</th>
-      <th>Refresh token</th>
-      <th>Steps</th>
-      <th>CarenID</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -17,10 +13,7 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= truncate user.access_token, length: 20 %></td>
-      <td><%= truncate user.refresh_token, length: 20 %></td>
-      <td><%= user.steps %></td>
-      <td><%= user.caren_id %></td>
+      <td><%= truncate user.access_token, length: 30 %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>

@@ -32,6 +32,11 @@
     <%= @user.caren_id %>
   </li>
 
+  <li>
+    <strong>Fitbit ID:</strong>
+    <%= @user.fitbit_id %>
+  </li>
+
 
 </ul>
 

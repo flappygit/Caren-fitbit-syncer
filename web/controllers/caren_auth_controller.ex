@@ -20,7 +20,14 @@ defmodule FitbitClient.CarenAuthController do
       })
       Repo.insert!(changeset)
       conn
-        |> put_flash(:info, "Welcome #{default_user["first_name"]}.")
-        |> redirect(to: "/")
+      |> put_session(:current_user, "Caren ID: #{default_user["id"]}")
+      |> redirect(to: "/")
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> put_flash(:info, "You have been logged out!")
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
   end
 end
