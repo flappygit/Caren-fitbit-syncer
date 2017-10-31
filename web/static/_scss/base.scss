@@ -1,0 +1,26 @@
+.container {
+  main {
+    .jumbotron {
+      background-image: url("/images/icon_pattern.png");
+      background-color: transparent;
+
+      p {
+        color: #d0598f;
+      }
+    }
+
+    .btn-success {
+      background-color: #d0598f;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #C22069;
+      border: none;
+    }
+
+    .logout {
+      float: right;
+    }
+  }
+}
