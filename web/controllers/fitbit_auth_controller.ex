@@ -10,7 +10,6 @@ defmodule FitbitClient.FitbitAuthController do
     current_user = get_session(conn, :current_user)
     token = Fitbit.get_token!(code: code)
     monthly_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
-
     build_observations(current_user, monthly_data["activities-steps"], [])
       |> post_observations
 
@@ -24,8 +23,9 @@ defmodule FitbitClient.FitbitAuthController do
 
     user_token_assoc = Ecto.build_assoc(updated_user, :tokens,
       %{
+        expires_in: token.token.expires_at,
         access_token: token.token.access_token,
-        refresh_token: token.token.refresh_token,
+        refresh_token: token.token.refresh_token
       })
       Repo.insert!(user_token_assoc)
 
@@ -33,7 +33,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> FitbitClient.Repo.preload(:tokens)
 
       conn
-      |> put_session(:current_user, %{current_user | fitbit_id: token.token.other_params["user_id"]})
+      |> put_session(:current_user, user_with_tokens)
       |> redirect(to: "/")
   end
 
