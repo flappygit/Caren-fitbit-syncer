@@ -2,22 +2,19 @@ defmodule FitbitClient.User do
   use FitbitClient.Web, :model
 
   schema "users" do
-    field :name, :string
-    field :email, :string
-    field :access_token, :string
-    field :refresh_token, :string
-    field :steps, :integer
+    has_many :tokens, FitbitClient.Token
     field :caren_id, :integer
     field :fitbit_id, :string
+    field :name, :string
+    field :email, :string
     timestamps()
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:name, :email, :access_token, :refresh_token, :steps, :caren_id, :fitbit_id])
-    # |> validate_required([:name, :email, :access_token, :refresh_token])
+  @required_fields ~w(name email)
+  @optional_fields ~w(caren_id fitbit_id)
+
+  def changeset(model, params \\ %{}) do
+    model
+      |> cast(params, @required_fields, @optional_fields)
   end
 end
