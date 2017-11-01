@@ -7,25 +7,33 @@ defmodule FitbitClient.FitbitAuthController do
   end
 
   def callback(conn, %{"code" => code}) do
+    current_user = get_session(conn, :current_user)
     token = Fitbit.get_token!(code: code)
-    user = OAuth2.Client.get!(token, "/1/user/-/profile.json").body
-    name = user["user"]["fullName"]
     monthly_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
-    build_observations(user, monthly_data["activities-steps"], [])
+
+    build_observations(current_user, monthly_data["activities-steps"], [])
       |> post_observations
 
-    changeset = User.changeset(%User{},
+    fetch_user_from_db = User |> FitbitClient.Repo.get_by(id: current_user.id)
+      |> FitbitClient.Repo.preload(:tokens)
+    changeset = User.changeset(fetch_user_from_db,
       %{
-        name: name,
-        user_id: token.token.other_params["user_id"],
-        access_token: token.token.access_token,
-        refresh_token: token.token.refresh_token,
         fitbit_id: token.token.other_params["user_id"]
       })
-      Repo.insert!(changeset)
+      updated_user = Repo.update!(changeset)
+
+    user_token_assoc = Ecto.build_assoc(updated_user, :tokens,
+      %{
+        access_token: token.token.access_token,
+        refresh_token: token.token.refresh_token,
+      })
+      Repo.insert!(user_token_assoc)
+
+    user_with_tokens = FitbitClient.Repo.get(FitbitClient.User, current_user.id)
+      |> FitbitClient.Repo.preload(:tokens)
 
       conn
-      |> put_session(:current_user, "Fitbit ID: #{token.token.other_params["user_id"]}")
+      |> put_session(:current_user, %{current_user | fitbit_id: token.token.other_params["user_id"]})
       |> redirect(to: "/")
   end
 
@@ -33,7 +41,7 @@ defmodule FitbitClient.FitbitAuthController do
     observation = %{
       "code" => "55423-8",
       "effectiveDateTime" => activity["dateTime"] <> " 00:00",
-      "performer" => user["user"]["fullName"],
+      "performer" => user.name,
       "valueQuantity" => %{
         "value" => activity["value"]
       },
@@ -50,7 +58,7 @@ defmodule FitbitClient.FitbitAuthController do
   def post_observations([head | tail]) do
     encoded_value = Poison.encode!(head)
     url = "http://localhost:3005/api/v1/dossier_entries/measurements"
-    headers = ["Authorization": "Bearer #{my_token}", "Content-Type": "application/json", "Accept": "Application/json"]
+    headers = ["Authorization": "Bearer caren_token", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
     post_observations(tail)
   end
@@ -81,7 +89,7 @@ defmodule FitbitClient.FitbitAuthController do
 
   def request_fitbit_data(user_token) do
     url = "https://api.fitbit.com/1/user/-/activities/steps/date/today/1d.json"
-    headers = ["Authorization": "Bearer #{user_token.access_token}", "Accept": "Application/json"]
+    headers = ["Authorization": "Bearer fitbit_token", "Accept": "Application/json"]
 
     {:ok, response} = HTTPoison.get(url, headers)
     synced_data = response.body

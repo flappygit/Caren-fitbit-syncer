@@ -10,11 +10,8 @@ defmodule FitbitClient.User do
     timestamps()
   end
 
-  @required_fields ~w(name email)
-  @optional_fields ~w(caren_id fitbit_id)
-
-  def changeset(model, params \\ %{}) do
-    model
-      |> cast(params, @required_fields, @optional_fields)
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :email, :caren_id, :fitbit_id])
   end
 end

@@ -4,14 +4,12 @@
 </div>
 
 <%= if @current_user do %>
-  <h2>Welcome, <%= @current_user %></h2>
-
-  <%= if String.contains? @current_user, "Fitbit" do %>
-    <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-warning") %>
-  <% else %>
+  <h2>Welcome, <%= @current_user.name %></h2>
+  <%= if @current_user.fitbit_id == nil do %>
     <%= link("Sign in with Fitbit", to: "/auth/fitbit", class: "btn btn-info") %>
+  <% else %>
+    <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-warning") %>
   <% end %>
-
   <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-danger logout", data: [confirm: "Are you sure?"]) %>
 <% else %>
   <%= link("Sign in with Caren", to: "/auth/caren", class: "btn btn-success") %>
