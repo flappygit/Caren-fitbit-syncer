@@ -1,0 +1,12 @@
+
+.canvas {
+
+  &__wrapper {
+    @extend .video__wrapper;
+  }
+
+  &__gradient {
+    background-color: $background-overlay-color; 
+    opacity: .7;
+  }
+}

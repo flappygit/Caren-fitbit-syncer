@@ -1,18 +1,17 @@
-<div class="jumbotron">
-  <h2><%= gettext "Stay fit with Caren" %></h2>
-  <p class="lead">With this awesome client your data<br />gets synced with Caren, how great is that!</p>
-</div>
+<div class="content__wrapper">
+  <h1>Hello. I like to sync.</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Proin sed imperdiet risus. In hac habitasse platea dictumst.</p>
 
-<%= if @current_user do %>
-  <h2>Welcome, <%= @current_user %></h2>
-
-  <%= if String.contains? @current_user, "Fitbit" do %>
-    <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-warning") %>
+  <%= if @current_user do %>
+    <h1>Hello <%= @current_user %>.</h1>
+    <p>Lorum ipsum dolor sit amet.</p>
+    <%= if String.contains? @current_user, "Fitbit" do %>
+      <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-secondary") %>
+    <% else %>
+      <%= link("Sign in with Fitbit", to: "/auth/fitbit", class: "btn btn-secondary") %>
+    <% end %>
+    <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-secondary logout", data: [confirm: "Are you sure?"]) %>
   <% else %>
-    <%= link("Sign in with Fitbit", to: "/auth/fitbit", class: "btn btn-info") %>
+    <%= link("Sign in with Caren", to: "/auth/caren", class: "btn btn-secondary") %>
   <% end %>
-
-  <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-danger logout", data: [confirm: "Are you sure?"]) %>
-<% else %>
-  <%= link("Sign in with Caren", to: "/auth/caren", class: "btn btn-success") %>
-<% end %>
+</div>

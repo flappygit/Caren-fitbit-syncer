@@ -6,9 +6,14 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "canvasrenderer": "^0.1.5",
+    "jquery": "^3.2.1",
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
-    "sass-brunch": "^2.10.4"
+    "projector": "^3.1.0",
+    "sass-brunch": "^2.10.4",
+    "three": "^0.87.1"
   },
   "devDependencies": {
     "babel-brunch": "6.1.1",

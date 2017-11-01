@@ -1,0 +1,64 @@
+
+@font-face {
+  font-family: 'machabold';
+  src: url('#{$font-path}positype_-_macha-bold-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machabold_italic';
+  src: url('#{$font-path}positype_-_macha-bolditalic-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-bolditalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machabook';
+  src: url('#{$font-path}positype_-_macha-book-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machabook_italic';
+  src: url('#{$font-path}positype_-_macha-bookitalic-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-bookitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machamedium';
+  src: url('#{$font-path}positype_-_macha-medium-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machamedium_italic';
+  src: url('#{$font-path}positype_-_macha-mediumitalic-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-mediumitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machathin';
+  src: url('#{$font-path}positype_-_macha-thin-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-thin-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'machathin_italic';
+  src: url('#{$font-path}positype_-_macha-thinitalic-webfont.woff2') format('woff2'),
+       url('#{$font-path}positype_-_macha-thinitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

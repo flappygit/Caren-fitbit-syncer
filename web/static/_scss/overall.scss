@@ -1,0 +1,75 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'machabook';
+  background: {
+    color: $background-overlay-color;
+  }
+  
+  .wrapper {
+    position: absolute;
+    opacity: 0;
+    transition: 1.5s opacity;
+    text-align: center;
+    color: $base-text-color;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+    
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  .content {
+    &__wrapper {
+      height: auto;
+      margin: auto;
+    }
+  }
+
+  h1 {
+    font: {
+      family: 'machabold';
+      size: 70px;
+    }
+    line-height: 65px;
+    margin-bottom: $base-gutter;
+  }
+
+  p {
+    margin-bottom: $base-gutter;
+  }
+
+  .header {
+    border: 0;
+
+    h3 {
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 3px;
+      margin-bottom: $base-gutter;
+    }
+  }
+
+  .btn {
+    font-size: 16px;
+    border: 2px solid $button-border-color;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 18px 25px;
+    color: $base-text-color;
+    background-color: transparent;
+    transition: all .1s ease-in;
+
+    &:hover {
+      color: $primary-base-color;
+      background-color: $button-hover-background-color;
+      border-color: $button-hover-background-color;
+    }
+  }
+}
