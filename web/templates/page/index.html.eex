@@ -11,7 +11,6 @@
       <p role="alert"><%= get_flash(@conn, :info) %></p>
       <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-secondary") %>
     <% end %>
-    <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-secondary logout") %>
   <% else %>
     <h1>Hello. I like to sync.</h1>
     <p>Before syncing your Fitbit data with Caren, please sign in with your Caren account.</p>

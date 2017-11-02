@@ -33,20 +33,6 @@
     }
   }
 
-  &__logo {
-    width: 70px;
-    height: 20px;
-    display: inline-block;
-    align-self: center;
-    background:{
-      image: url('#{$image-path}caren_logo.svg');
-      repeat: no-repeat;
-      position: center left;
-      size: 100%;
-    }
-    @include hide-text;
-  }
-
   &__logout {
     
   }
