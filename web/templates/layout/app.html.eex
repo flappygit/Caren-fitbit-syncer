@@ -11,7 +11,6 @@
   </head>
   <body>
     <div class="wrapper">
-
       <section class="container content__wrapper">
         <header class="header">
           <h3>Caren Fitbit Syncer</h3>
@@ -25,14 +24,12 @@
       <section class="canvas__wrapper">
         <div id="canvas" class="canvas__gradient"></div>
       </section>
-
     </div>
 
     <script src="/js/three.min.js"></script>
     <script src="/js/projector.js"></script>
     <script src="/js/canvas-renderer.js"></script>
-
-    <script src="<%= static_path(@conn, "/js/app.js")%>"></script>
     <script src="/js/3d-lines-animation.js"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
