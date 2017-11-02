@@ -7,25 +7,33 @@ defmodule FitbitClient.FitbitAuthController do
   end
 
   def callback(conn, %{"code" => code}) do
+    current_user = get_session(conn, :current_user)
     token = Fitbit.get_token!(code: code)
-    user = OAuth2.Client.get!(token, "/1/user/-/profile.json").body
-    name = user["user"]["fullName"]
     monthly_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
-    build_observations(user, monthly_data["activities-steps"], [])
+    build_observations(current_user, monthly_data["activities-steps"], [])
       |> post_observations
 
-    changeset = User.changeset(%User{},
+    fetch_user_from_db = User |> FitbitClient.Repo.get_by(id: current_user.id)
+      |> FitbitClient.Repo.preload(:tokens)
+    changeset = User.changeset(fetch_user_from_db,
       %{
-        name: name,
-        user_id: token.token.other_params["user_id"],
-        access_token: token.token.access_token,
-        refresh_token: token.token.refresh_token,
         fitbit_id: token.token.other_params["user_id"]
       })
-      Repo.insert!(changeset)
+      updated_user = Repo.update!(changeset)
+
+    user_token_assoc = Ecto.build_assoc(updated_user, :tokens,
+      %{
+        expires_in: token.token.expires_at,
+        access_token: token.token.access_token,
+        refresh_token: token.token.refresh_token
+      })
+      Repo.insert!(user_token_assoc)
+
+    user_with_tokens = FitbitClient.Repo.get(FitbitClient.User, current_user.id)
+      |> FitbitClient.Repo.preload(:tokens)
 
       conn
-      |> put_session(:current_user, "Fitbit ID: #{token.token.other_params["user_id"]}")
+      |> put_session(:current_user, user_with_tokens)
       |> redirect(to: "/")
   end
 
@@ -33,7 +41,7 @@ defmodule FitbitClient.FitbitAuthController do
     observation = %{
       "code" => "55423-8",
       "effectiveDateTime" => activity["dateTime"] <> " 00:00",
-      "performer" => user["user"]["fullName"],
+      "performer" => user.name,
       "valueQuantity" => %{
         "value" => activity["value"]
       },
@@ -68,13 +76,11 @@ defmodule FitbitClient.FitbitAuthController do
 
   def fitbit_sync(conn, _params) do
     session = get_session(conn, :current_user)
-     |> String.split(" ")
-     |> Enum.at(2)
 
-    user_token = User |> where([p], p.fitbit_id in [^session]) |> Repo.all
-      |> Enum.at(0)
+    temp_token = Enum.map(session.tokens, fn(token) -> token.access_token end)
+     |> Enum.at(1)
+     |> request_fitbit_data
 
-    request_fitbit_data(user_token)
     conn
     |> put_flash(:info, "Successfully synced.")
     |> redirect(to: "/")
@@ -82,7 +88,7 @@ defmodule FitbitClient.FitbitAuthController do
 
   def request_fitbit_data(user_token) do
     url = "https://api.fitbit.com/1/user/-/activities/steps/date/today/1d.json"
-    headers = ["Authorization": "Bearer #{user_token.access_token}", "Accept": "Application/json"]
+    headers = ["Authorization": "Bearer #{user_token}", "Accept": "Application/json"]
 
     {:ok, response} = HTTPoison.get(url, headers)
     synced_data = response.body
@@ -91,7 +97,8 @@ defmodule FitbitClient.FitbitAuthController do
     {:ok, fitbit_user} = HTTPoison.get("https://api.fitbit.com/1/user/-/profile.json", headers)
     observation_user = Poison.decode!(fitbit_user.body)
 
-    build_observations(observation_user, synced_data["activities-steps"], [])
+    required_syntax_temp = %{name: observation_user["user"]["fullName"]}
+    build_observations(required_syntax_temp, synced_data["activities-steps"], [])
       |> post_observations
   end
 end
