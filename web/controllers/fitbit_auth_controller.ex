@@ -50,7 +50,7 @@ defmodule FitbitClient.FitbitAuthController do
   def post_observations([head | tail]) do
     encoded_value = Poison.encode!(head)
     url = "http://localhost:3005/api/v1/dossier_entries/measurements"
-    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25faWQiOjEsImVsZXZhdGVkIjpmYWxzZSwidGltZV9pbl9taWxsaXNlY29uZHMiOjE1MDk1NDg3MTEyNjl9.5UWeV-YUIC9GPf3Pyt4Iq9bA-ZXEQCD38hBbSZq1zsNxDra-C9w-HSOz-v5pZHwqHB_mRkszX1N7zUrZsR3gZg"
+    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25faWQiOjEsImVsZXZhdGVkIjpmYWxzZSwidGltZV9pbl9taWxsaXNlY29uZHMiOjE1MDk2MTAxMzcyNTJ9.iClQy_G5FAbL4mAn_RNwZggYzRP9AdBtaehx0Y6snSUplg5jPw2QLv1RsWnQXzV1ykciuFI7a8lrOu654h0TJA"
     headers = ["Authorization": "Bearer #{token}", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
     post_observations(tail)

@@ -2,7 +2,22 @@
 .canvas {
 
   &__wrapper {
-    @extend .video__wrapper;
+    background: {
+      // image: url("/images/caren_fitbit_bg.jpg");
+      repeat: no-repeat;
+      size: cover;
+      color: rgba($background-overlay-color, 1);
+      position: center;
+    }
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
   }
 
   &__gradient {

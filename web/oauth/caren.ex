@@ -5,9 +5,9 @@ defmodule Caren do
   def client do
     OAuth2.Client.new([
       strategy: __MODULE__,
-      client_id: System.get_env("58982edd7cb0739922f4ddab200686fd1ddde110c67068590357a8256c77770d"),
-      client_secret: System.get_env("dfaf0e694d60e26d1c0f7e559a59b19b73e495dd5490572dec2954225cbafe80"),
-      redirect_uri: System.get_env("https://www.carenzorgt.nl/"),
+      client_id: "58982edd7cb0739922f4ddab200686fd1ddde110c67068590357a8256c77770d",
+      client_secret: "dfaf0e694d60e26d1c0f7e559a59b19b73e495dd5490572dec2954225cbafe80",
+      redirect_uri: "http://localhost:4000/auth/caren/callback",
       site: "http://localhost:3005",
       authorize_url: "http://localhost:3005/login/oauth/authorize",
       token_url: "http://developer.caren.dev:3005/oauth/token"
