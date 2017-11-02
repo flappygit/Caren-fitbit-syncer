@@ -22,6 +22,7 @@ defmodule FitbitClient.CarenAuthController do
 
     user_token_assoc = Ecto.build_assoc(inserted_user, :tokens,
       %{
+        provider: "caren",
         access_token: token.token.access_token,
         refresh_token: token.token.refresh_token,
         expires_in: token.token.expires_at
@@ -32,7 +33,7 @@ defmodule FitbitClient.CarenAuthController do
       |> FitbitClient.Repo.preload(:tokens)
 
     conn
-      |> put_flash(:info, "Welcome, #{default_user["first_name"]}")
+      |> put_flash(:info, "Great to see you again, #{default_user["first_name"]}!")
       |> put_session(:current_user, user_with_tokens)
       |> redirect(to: "/")
   end

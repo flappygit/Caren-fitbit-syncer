@@ -3,6 +3,7 @@ defmodule FitbitClient.Token do
 
   schema "tokens" do
     belongs_to :user, FitbitClient.User
+    field :provider, :string
     field :access_token, :string
     field :refresh_token, :string
     field :expires_in, :integer
@@ -11,7 +12,7 @@ defmodule FitbitClient.Token do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:access_token, :refresh_token, :expires_in])
+    |> cast(params, [:access_token, :refresh_token, :expires_in, :provider])
   end
 
 end

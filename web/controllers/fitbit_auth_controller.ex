@@ -23,6 +23,7 @@ defmodule FitbitClient.FitbitAuthController do
 
     user_token_assoc = Ecto.build_assoc(updated_user, :tokens,
       %{
+        provider: "fitbit",
         expires_in: token.token.expires_at,
         access_token: token.token.access_token,
         refresh_token: token.token.refresh_token
@@ -59,7 +60,7 @@ defmodule FitbitClient.FitbitAuthController do
   def post_observations([head | tail]) do
     encoded_value = Poison.encode!(head)
     url = "http://localhost:3005/api/v1/dossier_entries/measurements"
-    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25faWQiOjEsImVsZXZhdGVkIjpmYWxzZSwidGltZV9pbl9taWxsaXNlY29uZHMiOjE1MDk1NDg3MTEyNjl9.5UWeV-YUIC9GPf3Pyt4Iq9bA-ZXEQCD38hBbSZq1zsNxDra-C9w-HSOz-v5pZHwqHB_mRkszX1N7zUrZsR3gZg"
+    token = "343e2ab8f1a5f4a6b6c23b76cc5675993ef0f3500e97e73cf15ccc6e1531338a"
     headers = ["Authorization": "Bearer #{token}", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
     post_observations(tail)
@@ -78,18 +79,12 @@ defmodule FitbitClient.FitbitAuthController do
   def fitbit_sync(conn, _params) do
     session = get_session(conn, :current_user)
 
-    temp_token = Enum.map(session.tokens, fn(token) -> token.access_token end)
-     |> Enum.at(1)
-     |> request_fitbit_data
+    temp_token = Enum.map(session.tokens, fn(token) -> token end)
+      |> Enum.reject(fn t -> t.provider != "fitbit" end)
+      |> Enum.at(0)
 
-    conn
-    |> put_flash(:info, "Successfully synced.")
-    |> redirect(to: "/")
-  end
-
-  def request_fitbit_data(user_token) do
     url = "https://api.fitbit.com/1/user/-/activities/steps/date/today/1d.json"
-    headers = ["Authorization": "Bearer #{user_token}", "Accept": "Application/json"]
+    headers = ["Authorization": "Bearer #{temp_token.access_token}", "Accept": "Application/json"]
 
     {:ok, response} = HTTPoison.get(url, headers)
     synced_data = response.body
@@ -101,5 +96,9 @@ defmodule FitbitClient.FitbitAuthController do
     required_syntax_temp = %{name: observation_user["user"]["fullName"]}
     build_observations(required_syntax_temp, synced_data["activities-steps"], [])
       |> post_observations
+
+    conn
+      |> put_flash(:info, "Successfully synced: #{Enum.at(synced_data["activities-steps"], 0)["value"]} steps!")
+      |> redirect(to: "/")
   end
 end

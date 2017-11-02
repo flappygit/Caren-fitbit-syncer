@@ -12,24 +12,10 @@
   <body>
     <div class="wrapper">
 
-      <!-- <section class="video__wrapper js-video">
-        <figure class="video__overlay">
-          <video class="video__video" autoplay loop muted plays-inline controls poster="<%= static_path(@conn, "/images/caren_fitbit_bg.jpg") %>">
-            <source src="<%= static_path(@conn, "/images/video_bg_small.mp4") %>" type="video/mp4">
-          </video>
-
-        <div class="video__cover"></div>
-        </figure>
-        <button class="video__play">Play</button>
-      </section> -->
-
       <section class="container content__wrapper">
-        <p role="alert"><%= get_flash(@conn, :info) %></p>
         <header class="header">
           <h3>Caren Fitbit Syncer</h3>
         </header>
-
-        <!-- <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
 
         <main role="main">
           <%= render @view_module, @view_template, assigns %>
