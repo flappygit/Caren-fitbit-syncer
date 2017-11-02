@@ -24,12 +24,12 @@
       </section> -->
 
       <section class="container content__wrapper">
+        <p role="alert"><%= get_flash(@conn, :info) %></p>
         <header class="header">
           <h3>Caren Fitbit Syncer</h3>
         </header>
 
-        <!-- <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
+        <!-- <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
 
         <main role="main">
           <%= render @view_module, @view_template, assigns %>
@@ -45,9 +45,8 @@
     <script src="/js/three.min.js"></script>
     <script src="/js/projector.js"></script>
     <script src="/js/canvas-renderer.js"></script>
-    
-    <script src="<%= static_path(@conn, "/js/app.js") 
-    %>"></script>
+
+    <script src="<%= static_path(@conn, "/js/app.js")%>"></script>
     <script src="/js/3d-lines-animation.js"></script>
   </body>
 </html>

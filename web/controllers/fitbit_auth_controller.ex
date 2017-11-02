@@ -33,6 +33,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> FitbitClient.Repo.preload(:tokens)
 
       conn
+      |> put_flash(:info, "Succesfully linked your Fitbit account")
       |> put_session(:current_user, user_with_tokens)
       |> redirect(to: "/")
   end

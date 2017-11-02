@@ -1,9 +1,6 @@
 <div class="content__wrapper">
-  <h1>Hello. I like to sync.</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Proin sed imperdiet risus. In hac habitasse platea dictumst.</p>
-
   <%= if @current_user do %>
-    <h1>Welcome, <%= @current_user.name %></h1>
+    <h1>Welcome, <%= @current_user.name %>.</h1>
     <p>Lorum ipsum dolor sit amet.</p>
     <%= if @current_user.fitbit_id == nil do %>
       <%= link("Sign in with Fitbit", to: "/auth/fitbit", class: "btn btn-secondary") %>
@@ -12,6 +9,8 @@
     <% end %>
     <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-secondary logout", data: [confirm: "Are you sure?"]) %>
   <% else %>
+    <h1>Hello. I like to sync.</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Proin sed imperdiet risus. In hac habitasse platea dictumst.</p>
     <%= link("Sign in with Caren", to: "/auth/caren", class: "btn btn-secondary") %>
   <% end %>
 </div>

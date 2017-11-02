@@ -32,6 +32,7 @@ defmodule FitbitClient.CarenAuthController do
       |> FitbitClient.Repo.preload(:tokens)
 
     conn
+      |> put_flash(:info, "Welcome, #{default_user["first_name"]}")
       |> put_session(:current_user, user_with_tokens)
       |> redirect(to: "/")
   end
