@@ -11,12 +11,21 @@
   </head>
   <body>
     <div class="wrapper">
-      <section class="container content__wrapper">
-        <header class="header">
-          <h3>Caren Fitbit Syncer</h3>
+      <header class="topbar">
+          <div class="topbar__left"><a href="https://www.carenzorgt.nl" class="topbar__logo">Caren</a></div>
+          <div class="topbar__right">
+            <span class="topbar__username">Harmen Aversteeg</span>
+            <a href="#" class="btn btn-sm topbar__logout">logout</a>
+          </div>
         </header>
+      <section class="container content__wrapper">
+
+        <!-- <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
 
         <main role="main">
+          <header class="header">
+            <h3>Caren Fitbit Syncer</h3>
+          </header>
           <%= render @view_module, @view_template, assigns %>
         </main>
       </section>
@@ -25,11 +34,11 @@
         <div id="canvas" class="canvas__gradient"></div>
       </section>
     </div>
-
+    
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script src="/js/three.min.js"></script>
     <script src="/js/projector.js"></script>
     <script src="/js/canvas-renderer.js"></script>
     <script src="/js/3d-lines-animation.js"></script>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

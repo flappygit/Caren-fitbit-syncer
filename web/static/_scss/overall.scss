@@ -19,6 +19,7 @@ body {
     width: 100vw;
     display: flex;
     overflow: hidden;
+    min-width: $viewport-min-width;
     
     &.show {
       opacity: 1;
@@ -42,6 +43,7 @@ body {
   }
 
   p {
+    font-family: 'machabook';
     margin-bottom: $base-gutter;
   }
 
@@ -57,19 +59,35 @@ body {
   }
 
   .btn {
-    font-size: 16px;
     border: 2px solid $button-border-color;
-    border-radius: 8px;
     display: inline-block;
+    transition: all .1s ease-in;
+    color: $primary-base-color;
+    font-family: 'machamedium';  
+  }
+
+  .btn-secondary {
+    font-size: 16px;
     padding: 18px 25px;
     color: $base-text-color;
     background-color: transparent;
-    transition: all .1s ease-in;
+    border-radius: 8px;
 
     &:hover {
       color: $primary-base-color;
       background-color: $button-hover-background-color;
       border-color: $button-hover-background-color;
+    }
+  }
+
+  .btn-sm {
+    color: $primary-base-color;
+    background-color: $button-hover-background-color;
+    border-color: $button-hover-background-color;
+    font-size: 12px;
+
+    &:hover {
+      color: $primary-base-color;
     }
   }
 }

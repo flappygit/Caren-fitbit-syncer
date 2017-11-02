@@ -1,0 +1,53 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  min-width: $viewport-min-width;
+
+  > * {
+    display: flex;
+    width: 33%;
+  }
+
+  &__left {
+    justify-content: flex-start;
+  }
+  
+  &__right {
+    justify-content: flex-end;
+  }
+
+  &__username {
+    font: {
+      family: 'machabold';
+      size: 12px;
+    }
+    align-self: center;
+    margin: { 
+      right: $base-gutter;
+    }
+  }
+
+  &__logo {
+    width: 70px;
+    height: 20px;
+    display: inline-block;
+    align-self: center;
+    background:{
+      image: url('#{$image-path}caren_logo.svg');
+      repeat: no-repeat;
+      position: center left;
+      size: 100%;
+    }
+    @include hide-text;
+  }
+
+  &__logout {
+    
+  }
+}

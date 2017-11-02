@@ -1,6 +1,7 @@
+
 <div class="content__wrapper">
   <%= if @current_user do %>
-    <h1>Welcome, <%= @current_user.name %>.</h1>
+    <h1>Hi, <%= @current_user.name %>.</h1>
     <%= if @current_user.fitbit_id == nil do %>
       <p>Before syncing your Fitbit data with Caren, please connect your Fitbit account.</p>
       <p role="alert"><%= get_flash(@conn, :info) %></p>
@@ -9,7 +10,6 @@
       <p>By pressing the sync button your Caren account will be updated with the latest available Fitbit data</p>
       <p role="alert"><%= get_flash(@conn, :info) %></p>
       <%= link("Sync with Fitbit", to: "/sync", class: "btn btn-secondary") %>
-
     <% end %>
     <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-secondary logout") %>
   <% else %>
