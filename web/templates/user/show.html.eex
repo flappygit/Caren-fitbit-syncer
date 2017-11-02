@@ -13,21 +13,6 @@
   </li>
 
   <li>
-    <strong>Access token:</strong>
-    <%= @user.access_token %>
-  </li>
-
-  <li>
-    <strong>Refresh token:</strong>
-    <%= @user.refresh_token %>
-  </li>
-
-  <li>
-    <strong>Steps:</strong>
-    <%= @user.steps %>
-  </li>
-
-  <li>
     <strong>Caren ID:</strong>
     <%= @user.caren_id %>
   </li>

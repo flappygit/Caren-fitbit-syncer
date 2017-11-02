@@ -1,14 +1,14 @@
-defmodule FitbitClient.Repo.Migrations.CreateUser do
+defmodule FitbitClient.Repo.Migrations.CreateTables do
   use Ecto.Migration
 
   def change do
     create table(:users) do
+      add :caren_id, :integer
+      add :fitbit_id, :string
       add :name, :string
       add :email, :string
-      add :access_token, :text
-      add :refresh_token, :text
 
-      timestamps()
+      timestamps
     end
   end
 end
