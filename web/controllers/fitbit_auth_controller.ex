@@ -11,7 +11,7 @@ defmodule FitbitClient.FitbitAuthController do
     token = Fitbit.get_token!(code: code)
     monthly_data = OAuth2.Client.get!(token, "/1/user/-/activities/steps/date/today/1m.json").body
     build_observations(current_user, monthly_data["activities-steps"], [])
-      |> post_observations
+      |> post_observations(conn)
 
     fetch_user_from_db = User |> FitbitClient.Repo.get_by(id: current_user.id)
       |> FitbitClient.Repo.preload(:tokens)
@@ -57,16 +57,23 @@ defmodule FitbitClient.FitbitAuthController do
     observations
   end
 
-  def post_observations([head | tail]) do
+  def post_observations(list, opts \\ [])
+
+  def post_observations([head | tail], conn) do
+    session = get_session(conn, :current_user)
+    temp_token = Enum.map(session.tokens, fn(token) -> token end)
+      |> Enum.reject(fn t -> t.provider != "caren" end)
+      |> Enum.at(0)
+
     encoded_value = Poison.encode!(head)
     url = "http://localhost:3005/api/v1/dossier_entries/measurements"
-    token = "343e2ab8f1a5f4a6b6c23b76cc5675993ef0f3500e97e73cf15ccc6e1531338a"
+    token = temp_token.access_token
     headers = ["Authorization": "Bearer #{token}", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
-    post_observations(tail)
+    post_observations(tail, conn)
   end
 
-  def post_observations([]) do
+  def post_observations([], conn) do
   end
 
   def delete(conn, _params) do
@@ -95,7 +102,7 @@ defmodule FitbitClient.FitbitAuthController do
 
     required_syntax_temp = %{name: observation_user["user"]["fullName"]}
     build_observations(required_syntax_temp, synced_data["activities-steps"], [])
-      |> post_observations
+      |> post_observations(conn)
 
     conn
       |> put_flash(:info, "Successfully synced: #{Enum.at(synced_data["activities-steps"], 0)["value"]} steps!")
