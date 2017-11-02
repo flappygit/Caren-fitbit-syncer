@@ -14,7 +14,7 @@ use Mix.Config
 
 config :fitbit_client, FitbitClient.Endpoint,
   http: [:inet6, port: {:system, "PORT"}],
-  url: [scheme: "https", host: "shrouded-dawn-98188.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "fierce-eyrie-13090.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
