@@ -14,7 +14,7 @@
       <header class="topbar">
         <div class="topbar__left"></div>
         <div class="topbar__right">
-          <%= if @current_user do %> 
+          <%= if @current_user do %>
             <span class="topbar__username"><%= @current_user.name %></span>
             <%= link("Logout", to: fitbit_auth_path(@conn, :delete), method: :delete, class: "btn btn-sm topbar__logout") %>
           <% end %>
@@ -35,17 +35,17 @@
       <footer class="footer">
         <div class="footer__content">
           <a href="https://www.carenzorgt.nl" class="footer__logo">Caren</a>
-          <span class="footer__copyright">Copyright Caren 2017</span>
+          <span class="footer__copyright">&copy; Caren 2017</span>
           <a href="#" class="footer__disclaimer">Disclaimer</a>
-          <span>Want to build your own awesome app for Caren? <a href="#">Read the Docs</a> for more information.</span>
+          <span>Want to build your own awesome app for Caren? <a href="https://developer.carenzorgt.nl/docs">Read the Docs</a> for more information.</span>
         </div>
       </footer>
     </div>
-    
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <!-- <script src="/js/three.min.js"></script>
+    <script src="/js/three.min.js"></script>
     <script src="/js/projector.js"></script>
     <script src="/js/canvas-renderer.js"></script>
-    <script src="/js/3d-lines-animation.js"></script> -->
+    <script src="/js/3d-lines-animation.js"></script>
   </body>
 </html>

@@ -105,7 +105,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> post_observations(conn)
 
     conn
-      |> put_flash(:info, "Successfully synced: #{Enum.at(synced_data["activities-steps"], 0)["value"]} steps!")
+      |> put_flash(:info, "Successfully synced: #{Enum.at(synced_data["activities-steps"], 0)["value"]} steps")
       |> redirect(to: "/")
   end
 end
