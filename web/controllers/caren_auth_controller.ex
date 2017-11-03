@@ -4,7 +4,7 @@ defmodule FitbitClient.CarenAuthController do
   alias FitbitClient.Token
 
   def index(conn, _params) do
-    redirect conn, external: Caren.authorize_url!(scope: "user.read")
+    redirect conn, external: Caren.authorize_url!(scope: "user.read dossier.create")
   end
 
   def callback(conn, %{"code" => code}) do
