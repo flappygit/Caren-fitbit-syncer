@@ -8,9 +8,9 @@ defmodule Caren do
       client_id: System.get_env("CAREN_CLIENT_ID"),
       client_secret: System.get_env("CAREN_CLIENT_SECRET"),
       redirect_uri: System.get_env("CAREN_REDIRECT_URI"),
-      site: "http://localhost:3005",
-      authorize_url: "http://localhost:3005/login/oauth/authorize",
-      token_url: "http://caren.dev:3005/oauth/token"
+      site: "https://carenzorgt.nl",
+      authorize_url: "https://carenzorgt.nl/login/oauth/authorize",
+      token_url: "https://carenzorgt.nl/oauth/token"
     ])
   end
 
