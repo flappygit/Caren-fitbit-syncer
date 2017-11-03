@@ -1,7 +1,6 @@
 defmodule FitbitClient.CarenAuthController do
   use FitbitClient.Web, :controller
   alias FitbitClient.User
-  alias FitbitClient.Token
 
   def index(conn, _params) do
     redirect conn, external: Caren.authorize_url!(scope: "user.read")
