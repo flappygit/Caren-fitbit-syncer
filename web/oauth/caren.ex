@@ -13,11 +13,7 @@ defmodule Caren do
       token_url: "https://carenzorgt.nl/oauth/token"
     ])
   end
-
-  def redirect_url do
-    OAuth2.Client.authorize_url!(client(), scope: "user.read")
-  end
-
+  
   def authorize_url!(params \\ []) do
     OAuth2.Client.authorize_url!(client(), params)
   end
