@@ -17,7 +17,6 @@ defmodule FitbitClient.Router do
   scope "/", FitbitClient do
     pipe_through :browser # Use the default browser stack
     get "/", PageController, :index
-    resources "/users", UserController
     get "/sync", FitbitAuthController, :fitbit_sync
   end
 
