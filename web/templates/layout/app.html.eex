@@ -36,7 +36,7 @@
         <div class="footer__content">
           <a href="https://www.carenzorgt.nl" class="footer__logo">Caren</a>
           <span class="footer__copyright">&copy; Caren 2017</span>
-          <a href="#" class="footer__disclaimer">Disclaimer</a>
+          <a href="https://www.carenzorgt.nl/terms-of-service" class="footer__disclaimer">Disclaimer</a>
           <span>Want to build your own awesome app for Caren? <a href="https://developer.carenzorgt.nl/docs">Read the Docs</a> for more information.</span>
         </div>
       </footer>
