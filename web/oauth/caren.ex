@@ -15,10 +15,13 @@ defmodule Caren do
   end
 
   def authorize_url!(params \\ []) do
+    IO.puts("in the authorize URL")
+    IO.inspect(client())
     OAuth2.Client.authorize_url!(client(), params)
   end
 
   def get_token(params \\ [], headers \\ []) do
+    IO.puts("in get token")
     IO.inspect(client())
     IO.inspect(params)
     IO.inspect(headers)
@@ -31,7 +34,10 @@ defmodule Caren do
   end
 
   def get_token(client, params, headers) do
+    IO.puts("get_token")
     client
+    IO.inspect(client)
+    IO.inspect(params)
     |> put_param(:client_secret, client().client_secret)
     |> AuthCode.get_token(params, headers)
   end
