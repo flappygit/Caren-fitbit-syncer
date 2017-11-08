@@ -3,7 +3,7 @@ defmodule FitbitClient.FitbitAuthController do
   alias FitbitClient.User
 
   def index(conn, _params) do
-    redirect conn, external: Fitbit.authorize_url!(scope: "profile activity settings sleep heartrate")
+    redirect conn, external: Fitbit.authorize_url!(scope: "profile activity")
   end
 
   def callback(conn, %{"code" => code}) do
