@@ -92,7 +92,6 @@ defmodule FitbitClient.FitbitAuthController do
 
     url = "https://api.fitbit.com/1/user/-/activities/steps/date/today/1d.json"
     headers = ["Authorization": "Bearer #{temp_token.access_token}", "Accept": "Application/json"]
-
     {:ok, response} = HTTPoison.get(url, headers)
     synced_data = response.body
       |> Poison.decode!
@@ -100,7 +99,8 @@ defmodule FitbitClient.FitbitAuthController do
     {:ok, fitbit_user} = HTTPoison.get("https://api.fitbit.com/1/user/-/profile.json", headers)
     observation_user = Poison.decode!(fitbit_user.body)
 
-    required_syntax_temp = %{name: observation_user["user"]["fullName"]}
+    required_syntax_temp = %{name: observation_user["user"]["fullName"], caren_id: session.caren_id}
+
     build_observations(required_syntax_temp, synced_data["activities-steps"], [])
       |> post_observations(conn)
 
