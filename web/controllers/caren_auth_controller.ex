@@ -9,7 +9,8 @@ defmodule FitbitClient.CarenAuthController do
 
   def callback(conn, %{"code" => code}) do
     token = Caren.get_token(code: code)
-    user = OAuth2.Client.get!(token, "/api/v1/user").body
+    IO.inspect(token)
+    user = OAuth2.Client.get!(token, "https://carenzorgt.nl/api/v1/user").body
     default_user = user["_embedded"]["person"]
     user_changeset = User.changeset(%User{},
       %{
