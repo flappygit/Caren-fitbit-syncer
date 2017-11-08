@@ -8,9 +8,9 @@ defmodule Caren do
       client_id: System.get_env("CAREN_CLIENT_ID"),
       client_secret: System.get_env("CAREN_CLIENT_SECRET"),
       redirect_uri: System.get_env("CAREN_REDIRECT_URI"),
-      site: "https://carenzorgt.nl",
-      authorize_url: "https://carenzorgt.nl/login/oauth/authorize",
-      token_url: "https://carenzorgt.nl/oauth/token"
+      site: "https://www.carenzorgt.nl",
+      authorize_url: "https://www.carenzorgt.nl/login/oauth/authorize",
+      token_url: "https://www.carenzorgt.nl/oauth/token"
     ])
   end
 
@@ -36,10 +36,12 @@ defmodule Caren do
   def get_token(client, params, headers) do
     IO.puts("get_token")
     client
-    IO.inspect(client)
-    IO.inspect(params)
     |> put_param(:client_secret, client().client_secret)
-    |> AuthCode.get_token(params, headers)
+    |> IO.inspect
+    |> put_header("accept", "application/json")
+    |> IO.inspect
+    |> OAuth2.Strategy.AuthCode.get_token(params, headers)
+    |> IO.inspect
   end
 
 end

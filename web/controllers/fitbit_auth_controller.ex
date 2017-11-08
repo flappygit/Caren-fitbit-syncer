@@ -66,7 +66,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> Enum.at(0)
 
     encoded_value = Poison.encode!(head)
-    url = "https://carenzorgt.nl/api/v1/dossier_entries/measurements"
+    url = "https://www.carenzorgt.nl/api/v1/dossier_entries/measurements"
     token = temp_token.access_token
     headers = ["Authorization": "Bearer #{token}", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
