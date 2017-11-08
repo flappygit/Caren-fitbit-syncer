@@ -47,7 +47,7 @@ defmodule FitbitClient.FitbitAuthController do
       "valueQuantity" => %{
         "value" => activity["value"]
       },
-      "about_person" => 1,
+      "about_person" => user.caren_id,
       "external_updated_at" => activity["dateTime"] <> " 00:00"
     }
     build_observations(user, tail, [observation | observations])
