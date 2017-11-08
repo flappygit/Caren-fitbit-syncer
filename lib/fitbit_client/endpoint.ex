@@ -38,5 +38,6 @@ defmodule FitbitClient.Endpoint do
     key: "_fitbit_client_key",
     signing_salt: "Yhfiidmt"
 
+  use Appsignal.Phoenix
   plug FitbitClient.Router
 end

@@ -20,7 +20,7 @@ defmodule FitbitClient.Mixfile do
   def application do
     [
       mod: {FitbitClient, []},
-      extra_applications: [:logger, :oauth2, :phoenix_html_simplified_helpers, :httpoison]
+      extra_applications: [:logger, :oauth2, :phoenix_html_simplified_helpers, :httpoison, :appsignal]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule FitbitClient.Mixfile do
       {:phoenix_html_simplified_helpers, "~> 1.3.2"},
       {:joken, "~> 1.5"},
       {:poison, "~> 3.1"},
-      {:httpoison, "~> 0.13"}
+      {:httpoison, "~> 0.13"},
+      {:appsignal, "~> 1.0"}
     ]
   end
 

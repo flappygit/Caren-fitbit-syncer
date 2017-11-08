@@ -14,6 +14,7 @@ config :oauth2,
 
 # Configures the endpoint
 config :fitbit_client, FitbitClient.Endpoint,
+  instrumenters: [Appsignal.Phoenix.Instrumenter],
   url: [host: "localhost"],
   secret_key_base: "lrSGfOxVvir5EPO/EtwRFP/K7F+Q2SETCRfXOhgNlcC9rcaxN4Vpq/u0Vjd95yKM",
   render_errors: [view: FitbitClient.ErrorView, accepts: ~w(html json)],
