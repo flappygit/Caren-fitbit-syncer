@@ -102,7 +102,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> IO.inspect
     observation_user = Poison.decode!(fitbit_user.body)
 
-    required_syntax_temp = %{name: observation_user["user"]["fullName"]}
+    required_syntax_temp = %{name: observation_user["user"]["fullName"], caren_id: session.caren_id}
     build_observations(required_syntax_temp, synced_data["activities-steps"], [])
       |> post_observations(conn)
 
