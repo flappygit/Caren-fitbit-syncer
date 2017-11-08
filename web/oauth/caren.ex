@@ -19,6 +19,9 @@ defmodule Caren do
   end
 
   def get_token(params \\ [], headers \\ []) do
+    IO.inspect(client())
+    IO.inspect(params)
+    IO.inspect(headers)
     OAuth2.Client.get_token!(client(), params, headers)
   end
 
