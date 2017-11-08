@@ -70,6 +70,7 @@ defmodule FitbitClient.FitbitAuthController do
     token = temp_token.access_token
     headers = ["Authorization": "Bearer #{token}", "Content-Type": "application/json", "Accept": "Application/json"]
     HTTPoison.post(url, encoded_value, headers)
+      |> IO.inspect
     post_observations(tail, conn)
   end
 
@@ -98,6 +99,7 @@ defmodule FitbitClient.FitbitAuthController do
       |> Poison.decode!
 
     {:ok, fitbit_user} = HTTPoison.get("https://api.fitbit.com/1/user/-/profile.json", headers)
+      |> IO.inspect
     observation_user = Poison.decode!(fitbit_user.body)
 
     required_syntax_temp = %{name: observation_user["user"]["fullName"]}
