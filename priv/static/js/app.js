@@ -60901,46 +60901,63 @@ require.register("three/build/three.js", function(exports, require, module) {
 require.register("web/static/js/app.js", function(exports, require, module) {
 "use strict";
 
-require("phoenix_html");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-require("jquery");
+require("phoenix_html");
 
 require("three-canvas-renderer");
 
-var CarenFitbitClient = {
-  init: function init() {
-    CarenFitbitClient.showPage();
-    CarenFitbitClient.initAnimation();
-  },
-  showPage: function showPage() {
-    $('.wrapper').addClass('show');
-  },
-  initAnimation: function initAnimation() {
-    var mouseX = 0,
-        mouseY = 0,
-        windowHalfX = window.innerWidth / 2,
-        windowHalfY = window.innerHeight / 2,
-        SEPARATION = 1200,
-        AMOUNTX = 1,
-        AMOUNTY = 1,
-        camera = void 0,
-        scene = void 0,
-        renderer = void 0;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    init();
-    animate();
+var mouseX = 0,
+    mouseY = 0,
+    windowHalfX = window.innerWidth / 2,
+    windowHalfY = window.innerHeight / 2,
+    camera = void 0,
+    scene = void 0,
+    renderer = void 0,
+    container = void 0;
 
-    function init() {
-      var container = void 0,
-          separation = 1000,
-          amountX = 50,
-          amountY = 50,
-          color = 0xffffff,
-          particles = void 0,
-          particle = void 0;
+var color = 0xffffff;
 
-      container = document.getElementById("canvas");
+var showTime = function () {
+  function showTime() {
+    _classCallCheck(this, showTime);
 
+    this.wrapper = document.getElementsByClassName('wrapper')[0];
+  }
+
+  _createClass(showTime, [{
+    key: "render",
+    value: function render() {
+      document.addEventListener("DOMContentLoaded", this.showPage());
+    }
+  }, {
+    key: "showPage",
+    value: function showPage() {
+      this.wrapper.classList.add('show');
+    }
+  }]);
+
+  return showTime;
+}();
+
+var CanvasBackground = function () {
+  function CanvasBackground() {
+    _classCallCheck(this, CanvasBackground);
+
+    this.container = document.getElementById("canvas");
+  }
+
+  _createClass(CanvasBackground, [{
+    key: "render",
+    value: function render() {
+      this.initBackground();
+      this.animate();
+    }
+  }, {
+    key: "initBackground",
+    value: function initBackground() {
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
       camera.position.z = 100;
 
@@ -60953,11 +60970,10 @@ var CarenFitbitClient = {
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setClearColor(0x000000, 0); // canvas background color
       renderer.setSize(window.innerWidth, window.innerHeight);
-      container.appendChild(renderer.domElement);
+      this.container.appendChild(renderer.domElement);
 
       var PI2 = Math.PI * 2;
       var material = new THREE.SpriteCanvasMaterial({
-
         color: color,
         opacity: 0.5,
         program: function program(context) {
@@ -60968,7 +60984,13 @@ var CarenFitbitClient = {
         }
       });
 
-      var geometry = new THREE.Geometry();
+      this.draw(material);
+    }
+  }, {
+    key: "draw",
+    value: function draw(material) {
+      var geometry = new THREE.Geometry(),
+          particle = void 0;
 
       for (var i = 0; i < 150; i++) {
         particle = new THREE.Sprite(material);
@@ -60989,54 +61011,63 @@ var CarenFitbitClient = {
 
       scene.add(line);
 
-      document.addEventListener('mousemove', onDocumentMouseMove, false);
-      window.addEventListener('resize', onWindowResize, false);
+      document.addEventListener('mousemove', this.onDocumentMouseMove, false);
+      window.addEventListener('resize', this.onWindowResize, false);
     }
-
-    function onWindowResize() {
+  }, {
+    key: "onWindowResize",
+    value: function onWindowResize() {
       windowHalfX = window.innerWidth / 2;
       windowHalfY = window.innerHeight / 2;
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
-
-    function onDocumentMouseMove(event) {
+  }, {
+    key: "onDocumentMouseMove",
+    value: function onDocumentMouseMove(event) {
       mouseX = (event.clientX - windowHalfX) * 0.05;
       mouseY = (event.clientY - windowHalfY) * 0.2;
     }
-
-    function onDocumentTouchStart(event) {
+  }, {
+    key: "onDocumentTouchStart",
+    value: function onDocumentTouchStart(event) {
       if (event.touches.length > 1) {
         event.preventDefault();
         mouseX = (event.touches[0].pageX - windowHalfX) * 0.7;
         mouseY = (event.touches[0].pageY - windowHalfY) * 0.7;
       }
     }
-
-    function onDocumentTouchMove(event) {
+  }, {
+    key: "onDocumentTouchMove",
+    value: function onDocumentTouchMove(event) {
       if (event.touches.length == 1) {
         event.preventDefault();
         mouseX = event.touches[0].pageX - windowHalfX;
         mouseY = event.touches[0].pageY - windowHalfY;
       }
     }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      render();
+  }, {
+    key: "animate",
+    value: function animate() {
+      window.requestAnimationFrame(this.animate.bind(this));
+      this.renderAnimation();
     }
-
-    function render() {
+  }, {
+    key: "renderAnimation",
+    value: function renderAnimation() {
       camera.position.x += (mouseX - camera.position.x) * 0.1;
       camera.position.y += (-mouseY + 200 - camera.position.y) * 0.05;
       camera.lookAt(scene.position);
       renderer.render(scene, camera);
     }
-  }
-};
+  }]);
 
-$(window).ready(CarenFitbitClient.init);
+  return CanvasBackground;
+}();
+
+var canvas = new CanvasBackground().render();
+var fitbit = new showTime().render();
 
 });
 
