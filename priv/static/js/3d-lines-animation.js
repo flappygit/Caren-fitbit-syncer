@@ -37,7 +37,7 @@ function init() {
     renderer.setSize( window.innerWidth, window.innerHeight );
     container.appendChild( renderer.domElement );
 
-    
+
 
     var PI2 = Math.PI * 2;
     var material = new THREE.SpriteCanvasMaterial( {
@@ -83,8 +83,8 @@ function init() {
      scene.add( line );
 
      document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-     document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-     document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+    //  document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    //  document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 
     //
 
