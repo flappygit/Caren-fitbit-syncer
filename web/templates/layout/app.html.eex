@@ -8,6 +8,24 @@
     <meta name="author" content="Kevin Etore <kevin.etore@nedap.com> Harmen Aversteeg <h.aversteeg@nedap.com>">
     <title>Caren Fitbit Syncer</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="<%= static_path(@conn, "/images/apple-icon-57x57.png") %>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<%= static_path(@conn, "/images/apple-icon-60x60.png") %>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<%= static_path(@conn, "/images/apple-icon-72x72.png") %>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<%= static_path(@conn, "/images/apple-icon-76x76.png") %>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<%= static_path(@conn, "/images/apple-icon-114x114.png") %>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<%= static_path(@conn, "/images/apple-icon-120x120.png") %>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<%= static_path(@conn, "/images/apple-icon-144x144.png") %>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%= static_path(@conn, "/images/apple-icon-152x152.png") %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= static_path(@conn, "/images/apple-icon-180x180.png") %>">
+    <link rel="icon" type="image/png" sizes="192x192"  href="<%= static_path(@conn, "/images/android-icon-192x192.png") %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= static_path(@conn, "/images/favicon-32x32.png") %>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<%= static_path(@conn, "/images/favicon-96x96.png") %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= static_path(@conn, "/images/favicon-16x16.png") %>">
+    <link rel="manifest" href="<%= static_path(@conn, "/images/manifest.json") %>
+    <meta name="msapplication-TileColor" content="#3c1275">
+    <meta name="msapplication-TileImage" content="<%= static_path(@conn, "/images/ms-icon-144x144.png") %>">
+    <meta name="theme-color" content="#3c1275">
   </head>
   <body>
     <div class="wrapper">
@@ -34,10 +52,10 @@
       </section>
       <footer class="footer">
         <div class="footer__content">
-          <a href="https://www.carenzorgt.nl" class="footer__logo">Caren</a>
+          <a href="https://www.carenzorgt.nl" class="footer__logo" target="_blank">Caren</a>
           <span class="footer__copyright">&copy; Caren 2017</span>
-          <a href="https://www.carenzorgt.nl/terms-of-service" class="footer__disclaimer">Disclaimer</a>
-          <span>Want to build your own awesome app for Caren? <a href="https://developer.carenzorgt.nl/docs">Read the Docs</a> for more information.</span>
+          <a href="https://www.carenzorgt.nl/terms-of-service" class="footer__disclaimer" target="_blank">Disclaimer</a>
+          <span>Want to build your own awesome app for Caren? <a href="https://developer.carenzorgt.nl/docs" target="_blank">Read the Docs</a> for more information.</span>
         </div>
       </footer>
     </div>
