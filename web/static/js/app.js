@@ -5,9 +5,7 @@ let mouseX = 0,
     mouseY = 0,
     windowHalfX = window.innerWidth / 2,
     windowHalfY = window.innerHeight / 2,
-    camera, scene, renderer, container;
-
-const color = 0xffffff;
+    camera, scene, renderer;
 
 class showTime {
   constructor() {
@@ -50,7 +48,7 @@ class CanvasBackground {
 
     let PI2 = Math.PI * 2;
     let material = new THREE.SpriteCanvasMaterial({
-      color: color,
+      color: 0xffffff,
       opacity: 0.5,
       program: function(context) {
 
@@ -80,7 +78,7 @@ class CanvasBackground {
     }
 
     const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
-      color: color,
+      color: 0xffffff,
       opacity: 0.2
     }));
 
