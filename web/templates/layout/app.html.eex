@@ -59,11 +59,6 @@
         </div>
       </footer>
     </div>
-
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src="/js/three.min.js"></script>
-    <script src="/js/projector.js"></script>
-    <script src="/js/canvas-renderer.js"></script>
-    <script src="/js/3d-lines-animation.js"></script>
   </body>
 </html>
