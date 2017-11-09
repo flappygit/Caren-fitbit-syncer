@@ -1,13 +1,15 @@
 .topbar {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100vw;
-  padding: 8px 20px;
+  padding: 8px $base-gutter;
   display: flex;
   justify-content: space-between;
   min-width: $viewport-min-width;
+  order: 1;
+  margin-bottom: $base-gutter;
+  height: 48px;
 
   > * {
     display: flex;
@@ -31,9 +33,5 @@
     margin: { 
       right: $base-gutter;
     }
-  }
-
-  &__logout {
-    
   }
 }

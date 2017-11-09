@@ -10,7 +10,6 @@ body {
   }
   
   .wrapper {
-    position: absolute;
     opacity: 0;
     transition: 1.5s opacity;
     text-align: center;
@@ -18,18 +17,27 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    overflow: hidden;
     min-width: $viewport-min-width;
+    flex-flow: row wrap;
     
     &.show {
       opacity: 1;
+    }
+
+    > * {
+      flex: 1 100%;
+    }
+
+    @media (max-width: 460px) {
+      flex: 1 100%;
     }
   }
 
   .content {
     &__wrapper {
-      height: auto;
       margin: auto;
+      order: 2;
+      flex: 2 0px;
     }
   }
 
