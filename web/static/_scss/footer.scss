@@ -1,15 +1,17 @@
 
 .footer {
-  @extend .topbar;
-  bottom: 0;
-  top: auto;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  min-width: $viewport-min-width;
+  align-self: flex-end;
   padding: $base-gutter * 2;
+  opacity: .6;
   font: {
     family: 'machabook';
     size: 12px;
   }
-
-  opacity: .6;
+  order: 3;
 
   a {
     color: white;
@@ -17,6 +19,26 @@
 
     &:hover {
       color: rgba(white, .8);
+    }
+  }
+
+  @media (max-width: 600px) {
+    display: block;
+    position: relative;
+    padding: 15px;
+
+    .footer__content {
+      display: block;
+      width: auto;
+
+      .footer__logo {
+        display: block;
+        margin: 20px auto;
+      }
+    }
+
+    > * {
+      display: block;
     }
   }
 

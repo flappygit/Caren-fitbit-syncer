@@ -97,7 +97,6 @@ body {
   font-family: 'machabook';
   background-color: #3c1275; }
   body .wrapper {
-    position: absolute;
     opacity: 0;
     transition: 1.5s opacity;
     text-align: center;
@@ -105,13 +104,19 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    overflow: hidden;
-    min-width: 320px; }
+    min-width: 320px;
+    flex-flow: row wrap; }
     body .wrapper.show {
       opacity: 1; }
+    body .wrapper > * {
+      flex: 1 100%; }
+    @media (max-width: 460px) {
+      body .wrapper {
+        flex: 1 100%; } }
   body .content__wrapper {
-    height: auto;
-    margin: auto; }
+    margin: auto;
+    order: 2;
+    flex: 2 0px; }
   body h1 {
     font-family: 'machabold';
     font-size: 70px;
@@ -165,7 +170,7 @@ body {
   background-color: #3c1275;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   left: 0;
@@ -177,8 +182,7 @@ body {
   background-color: #3c1275;
   opacity: .7; }
 
-.topbar, .footer {
-  position: fixed;
+.topbar {
   top: 0;
   left: 0;
   right: 0;
@@ -186,8 +190,11 @@ body {
   padding: 8px 20px;
   display: flex;
   justify-content: space-between;
-  min-width: 320px; }
-  .topbar > *, .footer > * {
+  min-width: 320px;
+  order: 1;
+  margin-bottom: 20px;
+  height: 48px; }
+  .topbar > * {
     display: flex;
     width: 33%; }
   .topbar__left {
@@ -201,17 +208,34 @@ body {
     margin-right: 20px; }
 
 .footer {
-  bottom: 0;
-  top: auto;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  min-width: 320px;
+  align-self: flex-end;
   padding: 40px;
+  opacity: .6;
   font-family: 'machabook';
   font-size: 12px;
-  opacity: .6; }
+  order: 3; }
   .footer a {
     color: white;
     text-decoration: underline; }
     .footer a:hover {
       color: rgba(255, 255, 255, 0.8); }
+  @media (max-width: 600px) {
+    .footer {
+      display: block;
+      position: relative;
+      padding: 15px; }
+      .footer .footer__content {
+        display: block;
+        width: auto; }
+        .footer .footer__content .footer__logo {
+          display: block;
+          margin: 20px auto; }
+      .footer > * {
+        display: block; } }
   .footer__content {
     justify-content: center;
     width: 960px;
