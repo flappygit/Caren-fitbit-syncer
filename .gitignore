@@ -8,6 +8,7 @@
 erl_crash.dump
 
 # Static artifacts
+/priv/static
 /node_modules
 
 # The config/prod.secret.exs file by default contains sensitive

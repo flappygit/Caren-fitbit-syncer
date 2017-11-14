@@ -37,9 +37,19 @@ exports.config = {
   // Configure your plugins
   plugins: {
     babel: {
-      // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor/]
-    }
+      presets: ["es2015"]
+    },
+
+    uglify: {
+      mangle: true,
+      compress: {
+        global_defs: {
+          DEBUG: false
+        }
+      }
+    },
+
+    npm: ['babel-brunch']
   },
 
   modules: {
@@ -51,8 +61,7 @@ exports.config = {
   npm: {
     enabled: true,
     globals: {
-      $: 'jquery',
-      jQuery: 'jquery'
+      THREE: 'three'
     }
   }
 };
